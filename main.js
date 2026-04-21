@@ -1,3 +1,5 @@
+import { buildAffiliateUrl } from "./affiliate.js";
+
 const DEALS = [
   // PHONES
   { id: 1,  name: "iPhone 14 Pro 128GB",        category: "phones",     emoji: "📱", originalPrice: 999,  price: 549,  grade: "Grade A", source: "Back Market",      sourceUrl: "#", featured: true,  bg: "linear-gradient(135deg,#1a1a2e,#16213e)" },
@@ -98,7 +100,7 @@ function renderDeals() {
             <span class="deal-original">$${deal.originalPrice}</span>
             <span class="deal-savings">${pct}% off</span>
           </div>
-          <a href="${deal.sourceUrl}" class="btn btn--deal" target="_blank" rel="noopener noreferrer">View Deal →</a>
+          <a href="${buildAffiliateUrl(deal.sourceUrl, deal.source)}" class="btn btn--deal" target="_blank" rel="noopener noreferrer">View Deal →</a>
         </div>
       </div>
     `;
