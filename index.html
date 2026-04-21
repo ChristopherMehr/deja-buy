@@ -1,168 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deja Buy — Refurbished Deals Across the Web</title>
+  <title>Deja Buy — Refurbished Schnäppchen aus dem Web</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- NAV -->
-  <header class="nav">
     <div class="nav__inner container">
       <a href="#" class="nav__logo">Deja<span>Buy</span></a>
       <div class="nav__search">
-        <input type="text" id="search" placeholder="Search deals..." autocomplete="off" />
+        <input type="text" id="search" placeholder="Angebote suchen..." autocomplete="off" />
       </div>
       <nav class="nav__links">
-        <a href="#deals">Deals</a>
-        <a href="#how">How It Works</a>
+        <a href="#deals" data-i18n="nav_deals">Angebote</a>
+        <a href="#how" data-i18n="nav_how">So funktioniert's</a>
       </nav>
+      <button id="langToggle" class="lang-toggle" aria-label="Sprache wechseln">EN</button>
     </div>
   </header>
-
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__inner">
-      <span class="badge">500+ deals tracked daily</span>
-      <h1>The best refurbished deals,<br/>all in one place.</h1>
-      <p>We scan Back Market, Amazon Renewed, Swappa, eBay Refurbished and more — curating the top savings so you don't have to.</p>
+      <span class="badge" data-i18n="badge">Täglich 500+ Angebote erfasst</span>
+      <h1>
+        <span data-i18n="hero_h1_line1">Die besten Refurbished-Angebote,</span><br/>
+        <span data-i18n="hero_h1_line2">an einem Ort.</span>
+      </h1>
+      <p data-i18n="hero_sub">Wir durchsuchen Back Market, Amazon Renewed, Rebuy, eBay und mehr — und stellen täglich die besten Schnäppchen für Sie zusammen.</p>
       <div class="hero__stats">
         <div class="stat">
           <span class="stat__num">500+</span>
-          <span class="stat__label">Active Deals</span>
+          <span class="stat__label" data-i18n="stat_deals">Aktuelle Angebote</span>
         </div>
         <div class="stat">
           <span class="stat__num">6</span>
-          <span class="stat__label">Categories</span>
+          <span class="stat__label" data-i18n="stat_categories">Kategorien</span>
         </div>
         <div class="stat">
-          <span class="stat__num">Up to 65%</span>
-          <span class="stat__label">Off Retail</span>
+          <span class="stat__num" data-i18n="stat_savings_num">Bis zu 65%</span>
+          <span class="stat__label" data-i18n="stat_savings_label">Günstiger</span>
         </div>
         <div class="stat">
           <span class="stat__num">6</span>
-          <span class="stat__label">Trusted Retailers</span>
+          <span class="stat__label" data-i18n="stat_retailers">Geprüfte Händler</span>
         </div>
       </div>
     </div>
-  </section>
-
   <!-- RETAILERS BAR -->
   <div class="retailers-bar">
     <div class="container retailers-bar__inner">
-      <span class="retailers-label">Deals from</span>
+      <span class="retailers-label" data-i18n="deals_from">Angebote von</span>
       <div class="retailers-list">
         <span class="retailer-tag">Back Market</span>
         <span class="retailer-tag">Amazon Renewed</span>
-        <span class="retailer-tag">Swappa</span>
         <span class="retailer-tag">eBay Refurbished</span>
-        <span class="retailer-tag">Newegg</span>
-        <span class="retailer-tag">Reebelo</span>
+        <span class="retailer-tag">Rebuy</span>
+        <span class="retailer-tag">Refurbed</span>
+        <span class="retailer-tag">Asgoodasnew</span>
       </div>
     </div>
   </div>
-
-  <!-- DEALS -->
-  <section class="deals" id="deals">
     <div class="container">
       <div class="deals__header">
         <div class="filter-tabs" id="filterTabs">
-          <button class="filter-tab active" data-category="all">All Deals</button>
-          <button class="filter-tab" data-category="phones">📱 Phones</button>
-          <button class="filter-tab" data-category="laptops">💻 Laptops</button>
-          <button class="filter-tab" data-category="audio">🎧 Audio</button>
-          <button class="filter-tab" data-category="cameras">📷 Cameras</button>
-          <button class="filter-tab" data-category="gaming">🎮 Gaming</button>
-          <button class="filter-tab" data-category="appliances">🏠 Appliances</button>
+          <button class="filter-tab active" data-category="all"        data-i18n="filter_all">Alle Angebote</button>
+          <button class="filter-tab"        data-category="phones"     data-i18n="filter_phones">📱 Smartphones</button>
+          <button class="filter-tab"        data-category="laptops"    data-i18n="filter_laptops">💻 Laptops</button>
+          <button class="filter-tab"        data-category="audio"      data-i18n="filter_audio">🎧 Audio</button>
+          <button class="filter-tab"        data-category="cameras"    data-i18n="filter_cameras">📷 Kameras</button>
+          <button class="filter-tab"        data-category="gaming"     data-i18n="filter_gaming">🎮 Gaming</button>
+          <button class="filter-tab"        data-category="appliances" data-i18n="filter_appliances">🏠 Haushaltsgeräte</button>
         </div>
         <div class="deals__controls">
           <span class="deal-count" id="dealCount"></span>
           <select id="sortSelect" class="sort-select">
-            <option value="savings">Best Savings</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
+            <option value="savings">Beste Ersparnis</option>
+            <option value="price-asc">Preis: aufsteigend</option>
+            <option value="price-desc">Preis: absteigend</option>
           </select>
         </div>
       </div>
-
       <div class="deal-grid" id="dealGrid"></div>
-
       <div class="no-results" id="noResults" style="display:none">
-        <p>No deals found. Try a different search or category.</p>
+        <p data-i18n="no_results">Keine Angebote gefunden. Versuchen Sie eine andere Suche oder Kategorie.</p>
       </div>
     </div>
   </section>
-
   <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="container">
-      <h2 class="section-title">How Deja Buy Works</h2>
-      <p class="section-sub">We do the legwork. You get the savings.</p>
+      <h2 class="section-title" data-i18n="how_title">So funktioniert Deja Buy</h2>
+      <p class="section-sub" data-i18n="how_sub">Wir übernehmen die Suche. Sie sparen.</p>
       <div class="how-grid">
         <div class="how-card">
           <div class="how-step">01</div>
           <div class="how-icon">🔍</div>
-          <h3>We Track</h3>
-          <p>Our team monitors hundreds of refurbished listings across the web's top resale and refurb platforms every day.</p>
+          <h3 data-i18n="how1_title">Wir tracken</h3>
+          <p data-i18n="how1_body">Unser Team überwacht täglich hunderte von Refurbished-Angeboten auf den führenden Wiederverkaufs- und Refurb-Plattformen.</p>
         </div>
         <div class="how-card">
           <div class="how-step">02</div>
           <div class="how-icon">✅</div>
-          <h3>We Curate</h3>
-          <p>Only deals with strong savings, reputable sellers, and clear grading make the cut. No junk listings.</p>
+          <h3 data-i18n="how2_title">Wir filtern</h3>
+          <p data-i18n="how2_body">Nur Angebote mit hohen Ersparnissen, seriösen Händlern und klarer Zustandsbeschreibung schaffen es auf die Liste.</p>
         </div>
         <div class="how-card">
           <div class="how-step">03</div>
           <div class="how-icon">💸</div>
-          <h3>You Save</h3>
-          <p>Click through to buy directly from the retailer. We never handle payments — just the discovery.</p>
+          <h3 data-i18n="how3_title">Sie sparen</h3>
+          <p data-i18n="how3_body">Klicken Sie weiter, um direkt beim Händler zu kaufen. Wir wickeln keine Zahlungen ab — nur die Suche.</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
         <a href="#" class="nav__logo">Deja<span>Buy</span></a>
-        <p>Curating the best refurbished deals from trusted retailers across the web.</p>
+        <p data-i18n="footer_tagline">Die besten Refurbished-Angebote von geprüften Händlern.</p>
       </div>
       <div class="footer__links">
         <div class="footer__col">
-          <h4>Categories</h4>
-          <a href="#">Phones</a>
-          <a href="#">Laptops</a>
-          <a href="#">Audio</a>
-          <a href="#">Cameras</a>
-          <a href="#">Gaming</a>
-          <a href="#">Appliances</a>
+          <h4 data-i18n="footer_col_categories">Kategorien</h4>
+          <a href="#" data-i18n="footer_phones">Smartphones</a>
+          <a href="#" data-i18n="footer_laptops">Laptops</a>
+          <a href="#" data-i18n="footer_audio">Audio</a>
+          <a href="#" data-i18n="footer_cameras">Kameras</a>
+          <a href="#" data-i18n="footer_gaming">Gaming</a>
+          <a href="#" data-i18n="footer_appliances">Haushaltsgeräte</a>
         </div>
         <div class="footer__col">
-          <h4>Retailers</h4>
+          <h4 data-i18n="footer_col_retailers">Händler</h4>
           <a href="#">Back Market</a>
           <a href="#">Amazon Renewed</a>
-          <a href="#">Swappa</a>
           <a href="#">eBay Refurbished</a>
-          <a href="#">Newegg</a>
-          <a href="#">Reebelo</a>
+          <a href="#">Rebuy</a>
+          <a href="#">Refurbed</a>
+          <a href="#">Asgoodasnew</a>
         </div>
         <div class="footer__col">
-          <h4>Company</h4>
-          <a href="#">About</a>
-          <a href="#">How It Works</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Contact</a>
+          <h4 data-i18n="footer_col_company">Unternehmen</h4>
+          <a href="#" data-i18n="footer_about">Über uns</a>
+          <a href="#" data-i18n="footer_how">So funktioniert's</a>
+          <a href="#" data-i18n="footer_privacy">Datenschutz</a>
+          <a href="#" data-i18n="footer_contact">Kontakt</a>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
-      <p>&copy; 2026 Deja Buy. We may earn a commission on qualifying purchases.</p>
+      <p data-i18n="footer_bottom">© 2026 Deja Buy. Wir können eine Provision für qualifizierte Käufe erhalten.</p>
     </div>
   </footer>
-
-  <script type="module" src="main.js"></script>
-</body>
-</html>
