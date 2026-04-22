@@ -4,12 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Deja Buy — Refurbished Schnäppchen aus dem Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="nav">
     <div class="nav__inner container">
-      <a href="#" class="nav__logo">Deja<span>Buy</span></a>
+      <a href="#" class="nav__logo">
+        <svg class="nav__logo-mark" width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M 26.52 20.71 A 11.52 11.52 0 1 1 26.52 11.29" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <polyline points="30.02,9.05 26.52,11.29 30.30,13.03" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="nav__wordmark">DEJA<span class="nav__wordmark-accent">BUY</span></span>
+      </a>
       <div class="nav__search">
         <input type="text" id="search" placeholder="Angebote suchen..." autocomplete="off" />
       </div>
@@ -127,7 +136,13 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <a href="#" class="nav__logo">Deja<span>Buy</span></a>
+        <a href="#" class="nav__logo">
+          <svg class="nav__logo-mark" width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M 26.52 20.71 A 11.52 11.52 0 1 1 26.52 11.29" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="30.02,9.05 26.52,11.29 30.30,13.03" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="nav__wordmark">DEJA<span class="nav__wordmark-accent">BUY</span></span>
+        </a>
         <p data-i18n="footer_tagline">Die besten Refurbished-Angebote von geprüften Händlern.</p>
       </div>
       <div class="footer__col">
