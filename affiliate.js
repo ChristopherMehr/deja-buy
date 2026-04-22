@@ -8,6 +8,7 @@ const AFFILIATE_CONFIG = {
   refurbed:     { affiliateId: "" },              // Refurbed.com direct program
   asgoodasnew:  { affiliateId: "" },              // Asgoodasnew.com via Awin
 };
+
 function isConfigured(source) {
   const c = AFFILIATE_CONFIG;
   switch (source) {
@@ -20,10 +21,12 @@ function isConfigured(source) {
     default:                 return false;
   }
 }
+
 export function buildAffiliateUrl(rawUrl, source) {
   if (!isConfigured(source)) return rawUrl;
   switch (source) {
     case "Amazon Renewed": {
+      const url = new URL(rawUrl);
       url.searchParams.set("tag", AFFILIATE_CONFIG.amazon_de.tag);
       return url.toString();
     }
@@ -34,9 +37,12 @@ export function buildAffiliateUrl(rawUrl, source) {
       rover.searchParams.set("campid", campaignId);
       rover.searchParams.set("customid", customId);
       rover.searchParams.set("toolid", "10001");
+      rover.searchParams.set("mpre", rawUrl);
+      return rover.toString();
     }
     case "Back Market": {
       // Back Market Germany uses Awin affiliate network
+      const url = new URL(rawUrl);
       url.searchParams.set("utm_source", "dejabuy");
       url.searchParams.set("utm_medium", "affiliate");
       url.searchParams.set("awc", AFFILIATE_CONFIG.backmarket.affiliateId);
@@ -52,14 +58,20 @@ export function buildAffiliateUrl(rawUrl, source) {
     }
     case "Refurbed": {
       // Refurbed.com direct affiliate program
+      const url = new URL(rawUrl);
       url.searchParams.set("a_aid", AFFILIATE_CONFIG.refurbed.affiliateId);
       url.searchParams.set("a_bid", "dejabuy");
       return url.toString();
     }
     case "Asgoodasnew": {
       // Asgoodasnew.com uses Awin affiliate network
+      const url = new URL(rawUrl);
       url.searchParams.set("utm_source", "dejabuy");
       url.searchParams.set("utm_medium", "affiliate");
       url.searchParams.set("awc", AFFILIATE_CONFIG.asgoodasnew.affiliateId);
       return url.toString();
     }
+    default:
+      return rawUrl;
+  }
+}

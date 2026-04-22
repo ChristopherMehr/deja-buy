@@ -1,5 +1,6 @@
 import { buildAffiliateUrl } from "./affiliate.js";
 import { t, getCurrentLang, setLang, applyTranslations } from "./translations.js";
+
 const DEALS = [
   // SMARTPHONES
   { id: 1,  name: "iPhone 15 Pro 128GB",           category: "phones",     emoji: "📱", originalPrice: 1199, price: 749,  grade: "Grade A", source: "Back Market",      sourceUrl: "#", featured: true,  bg: "linear-gradient(135deg,#1a1a2e,#16213e)" },
@@ -35,6 +36,7 @@ const DEALS = [
   { id: 26, name: "KitchenAid Artisan 5KSM175",   category: "appliances", emoji: "🍴", originalPrice: 499,  price: 259,  grade: "Grade B", source: "eBay Refurbished", sourceUrl: "#", featured: false, bg: "linear-gradient(135deg,#1b262c,#2d3436)" },
   { id: 27, name: "iRobot Roomba j7+",             category: "appliances", emoji: "🤖", originalPrice: 799,  price: 369,  grade: "Grade A", source: "Asgoodasnew",      sourceUrl: "#", featured: false, bg: "linear-gradient(135deg,#1a1a2e,#0f3460)" },
 ];
+
 const SOURCE_COLORS = {
   "Back Market":      "#22c55e",
   "Amazon Renewed":   "#f59e0b",
@@ -43,24 +45,49 @@ const SOURCE_COLORS = {
   "Refurbed":         "#a855f7",
   "Asgoodasnew":      "#06b6d4",
 };
+
 let activeCategory = "all";
+let searchQuery = "";
+
+function getSavings(deal) {
   return Math.round((1 - deal.price / deal.originalPrice) * 100);
 }
+
 function formatPrice(amount) {
   return `${amount.toLocaleString("de-DE")} €`;
 }
+
 function getFilteredDeals() {
+  const sortVal = document.getElementById("sortSelect").value;
   return DEALS
     .filter(d => activeCategory === "all" || d.category === activeCategory)
+    .filter(d => !searchQuery || d.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .sort((a, b) => {
+      if (sortVal === "savings")    return getSavings(b) - getSavings(a);
+      if (sortVal === "price-asc")  return a.price - b.price;
+      if (sortVal === "price-desc") return b.price - a.price;
+      return 0;
+    });
+}
+
+function renderDeals() {
+  const grid = document.getElementById("dealGrid");
   const noResults = document.getElementById("noResults");
   const dealCount = document.getElementById("dealCount");
+  const deals = getFilteredDeals();
+
   dealCount.textContent = `${deals.length} ${deals.length !== 1 ? t("deal_plural") : t("deal_singular")}`;
+
   if (deals.length === 0) {
     grid.innerHTML = "";
     noResults.style.display = "block";
     noResults.querySelector("p").textContent = t("no_results");
     return;
   }
+
+  noResults.style.display = "none";
+  grid.innerHTML = deals.map(deal => {
+    const pct = getSavings(deal);
     const srcColor = SOURCE_COLORS[deal.source] || "#8890a6";
     return `
       <div class="deal-card${deal.featured ? " deal-card--featured" : ""}">
@@ -68,6 +95,10 @@ function getFilteredDeals() {
         <div class="deal-card__header">
           <span class="source-badge" style="--src-color:${srcColor}">${deal.source}</span>
           <span class="grade-badge grade-badge--${deal.grade === "Grade A" ? "a" : "b"}">${deal.grade}</span>
+        </div>
+        <div class="deal-card__img" style="background:${deal.bg}">
+          <span class="deal-emoji">${deal.emoji}</span>
+        </div>
         <div class="deal-card__body">
           <p class="deal-name">${deal.name}</p>
           <div class="deal-pricing">
@@ -79,18 +110,45 @@ function getFilteredDeals() {
         </div>
       </div>
     `;
+  }).join("");
+}
+
+document.getElementById("filterTabs").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-tab");
+  if (!btn) return;
+  document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  activeCategory = btn.dataset.category;
   renderDeals();
 });
+
+document.getElementById("sortSelect").addEventListener("change", renderDeals);
+
+document.getElementById("search").addEventListener("input", e => {
+  searchQuery = e.target.value.trim();
+  renderDeals();
+});
+
 document.getElementById("langToggle").addEventListener("click", () => {
   const newLang = getCurrentLang() === "de" ? "en" : "de";
   setLang(newLang);
   applyTranslations();
   renderDeals();
 });
+
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav__links a");
-);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+      });
+    }
+  });
+}, { threshold: 0.5 });
 sections.forEach(s => observer.observe(s));
+
 // Init: apply stored language preference, then render
 setLang(getCurrentLang());
 applyTranslations();

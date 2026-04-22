@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <header class="nav">
     <div class="nav__inner container">
       <a href="#" class="nav__logo">Deja<span>Buy</span></a>
       <div class="nav__search">
@@ -19,6 +20,7 @@
       <button id="langToggle" class="lang-toggle" aria-label="Sprache wechseln">EN</button>
     </div>
   </header>
+
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__inner">
@@ -47,6 +49,8 @@
         </div>
       </div>
     </div>
+  </section>
+
   <!-- RETAILERS BAR -->
   <div class="retailers-bar">
     <div class="container retailers-bar__inner">
@@ -61,6 +65,9 @@
       </div>
     </div>
   </div>
+
+  <!-- DEALS -->
+  <section class="deals" id="deals">
     <div class="container">
       <div class="deals__header">
         <div class="filter-tabs" id="filterTabs">
@@ -87,6 +94,7 @@
       </div>
     </div>
   </section>
+
   <!-- HOW IT WORKS -->
   <section class="how" id="how">
     <div class="container">
@@ -113,40 +121,46 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
         <a href="#" class="nav__logo">Deja<span>Buy</span></a>
         <p data-i18n="footer_tagline">Die besten Refurbished-Angebote von geprüften Händlern.</p>
       </div>
-      <div class="footer__links">
-        <div class="footer__col">
-          <h4 data-i18n="footer_col_categories">Kategorien</h4>
-          <a href="#" data-i18n="footer_phones">Smartphones</a>
-          <a href="#" data-i18n="footer_laptops">Laptops</a>
-          <a href="#" data-i18n="footer_audio">Audio</a>
-          <a href="#" data-i18n="footer_cameras">Kameras</a>
-          <a href="#" data-i18n="footer_gaming">Gaming</a>
-          <a href="#" data-i18n="footer_appliances">Haushaltsgeräte</a>
-        </div>
-        <div class="footer__col">
-          <h4 data-i18n="footer_col_retailers">Händler</h4>
-          <a href="#">Back Market</a>
-          <a href="#">Amazon Renewed</a>
-          <a href="#">eBay Refurbished</a>
-          <a href="#">Rebuy</a>
-          <a href="#">Refurbed</a>
-          <a href="#">Asgoodasnew</a>
-        </div>
-        <div class="footer__col">
-          <h4 data-i18n="footer_col_company">Unternehmen</h4>
-          <a href="#" data-i18n="footer_about">Über uns</a>
-          <a href="#" data-i18n="footer_how">So funktioniert's</a>
-          <a href="#" data-i18n="footer_privacy">Datenschutz</a>
-          <a href="#" data-i18n="footer_contact">Kontakt</a>
-        </div>
+      <div class="footer__col">
+        <h4 data-i18n="footer_col_categories">Kategorien</h4>
+        <a href="#" data-i18n="footer_phones">Smartphones</a>
+        <a href="#" data-i18n="footer_laptops">Laptops</a>
+        <a href="#" data-i18n="footer_audio">Audio</a>
+        <a href="#" data-i18n="footer_cameras">Kameras</a>
+        <a href="#" data-i18n="footer_gaming">Gaming</a>
+        <a href="#" data-i18n="footer_appliances">Haushaltsgeräte</a>
+      </div>
+      <div class="footer__col">
+        <h4 data-i18n="footer_col_retailers">Händler</h4>
+        <a href="#">Back Market</a>
+        <a href="#">Amazon Renewed</a>
+        <a href="#">eBay Refurbished</a>
+        <a href="#">Rebuy</a>
+        <a href="#">Refurbed</a>
+        <a href="#">Asgoodasnew</a>
+      </div>
+      <div class="footer__col">
+        <h4 data-i18n="footer_col_company">Unternehmen</h4>
+        <a href="#" data-i18n="footer_about">Über uns</a>
+        <a href="#" data-i18n="footer_how">So funktioniert's</a>
+        <a href="#" data-i18n="footer_privacy">Datenschutz</a>
+        <a href="#" data-i18n="footer_contact">Kontakt</a>
       </div>
     </div>
     <div class="footer__bottom">
       <p data-i18n="footer_bottom">© 2026 Deja Buy. Wir können eine Provision für qualifizierte Käufe erhalten.</p>
     </div>
   </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
